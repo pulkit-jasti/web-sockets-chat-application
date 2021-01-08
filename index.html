@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pulkit Sample</title>
+		<style>
+			#messages {
+				display: flex;
+				flex-direction: column;
+			}
+			.message {
+				width: 200px;
+				margin: 10px;
+				padding: 10px;
+				background-color: rgb(168, 168, 168);
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div id="messages"></div>
+			<form id="form" action="">
+				<input id="input" type="text" />
+				<button type="submit">Submit</button>
+			</form>
+		</main>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io();
+
+			const form = document.getElementById('form');
+			const input = document.getElementById('input');
+			const messages = document.getElementById('messages');
+
+			socket.on('message-sent', message => {
+				let item = document.createElement('p');
+				item.textContent = message;
+				item.classList.add('message');
+				messages.appendChild(item);
+			});
+
+			form.addEventListener('submit', e => {
+				e.preventDefault();
+				socket.emit('message-sent', 'sample text');
+			});
+		</script>
+	</body>
+</html>
