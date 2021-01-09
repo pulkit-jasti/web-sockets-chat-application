@@ -1,0 +1,19 @@
+#messages {
+	display: flex;
+	flex-direction: column;
+
+	.message {
+		width: 200px;
+		margin: 10px;
+		padding: 10px;
+		background-color: rgb(168, 168, 168);
+	}
+
+	.message-right {
+		margin-left: 200px;
+	}
+
+	.user-name {
+		color: red;
+	}
+}

@@ -2,10 +2,10 @@
 	"name": "web-sockets-chat-application",
 	"version": "1.0.0",
 	"description": "Web sockets based chatting application",
-	"main": "index.js",
+	"main": "server.js",
 	"scripts": {
-		"start": "node index.js",
-		"test": "nodemon index.js"
+		"start": "node server.js",
+		"test": "nodemon server.js"
 	},
 	"repository": {
 		"type": "git",

@@ -3,53 +3,23 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<style></style>
 		<title>Pulkit Sample</title>
-		<style>
-			#messages {
-				display: flex;
-				flex-direction: column;
-			}
-			.message {
-				width: 200px;
-				margin: 10px;
-				padding: 10px;
-				background-color: rgb(168, 168, 168);
-			}
-		</style>
+		<link rel="stylesheet" href="/style.min.css" />
 	</head>
 	<body>
 		<main>
 			<div id="messages"></div>
-			<form id="form" action="">
+			<form id="form" action="" autocomplete="off">
 				<input id="input" type="text" />
 				<button type="submit">Submit</button>
 			</form>
+
+			<button id="test-btn">Test</button>
 		</main>
 
 		<script src="/socket.io/socket.io.js"></script>
-		<script>
-			var socket = io();
-
-			const form = document.getElementById('form');
-			const input = document.getElementById('input');
-			const messages = document.getElementById('messages');
-
-			socket.on('message-sent', message => {
-				let item = document.createElement('p');
-				item.textContent = message;
-				item.classList.add('message');
-				messages.appendChild(item);
-			});
-
-			form.addEventListener('submit', e => {
-				e.preventDefault();
-				if (input) {
-					socket.emit('message-sent', input.value);
-					input.value = '';
-				} else {
-					alert('Enter something in the text field');
-				}
-			});
-		</script>
+		<script src="/script.js"></script>
 	</body>
 </html>
