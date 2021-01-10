@@ -7,11 +7,24 @@ const test = document.getElementById('test-btn');
 
 let userName = prompt('Enter your name');
 
+function GetTime() {
+	let d = new Date();
+	let n = d.getHours();
+
+	if (n > 12) {
+		var time = `${n - 12}:${d.getMinutes()} PM`;
+	} else {
+		var time = `${n}:${d.getMinutes()} AM`;
+	}
+
+	return time;
+}
+
 function createMessage(msg, dir, userName) {
 	let item = document.createElement('div');
 	item.innerHTML = `
-        <p class="user-name">${userName}</p>
-        <p class="message">${msg}</p>
+        <div class="user-name"><div>${userName}</div> <div class="time">${GetTime()}</div></div>
+        <div class="message">${msg}</div>
     `;
 	item.classList.add(`message-${dir}`);
 	messages.appendChild(item);

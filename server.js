@@ -23,9 +23,4 @@ io.on('connection', socket => {
 	socket.on('message-sent', message => {
 		socket.broadcast.emit('message-sent', message);
 	});
-
-	socket.on('test-click', cb => {
-		console.log(cb);
-		socket.broadcast.emit('new message', 'sample btn');
-	});
 });

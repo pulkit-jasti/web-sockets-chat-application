@@ -1,12 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+/* font-family: 'Montserrat', sans-serif; */
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	//font-family: 'Montserrat', sans-serif;
+	font-family: sans-serif;
+}
+
 #messages {
+	padding: 30px;
 	display: flex;
 	flex-direction: column;
 
-	.message {
-		width: 200px;
+	.message-left,
+	.message-right {
+		min-width: 100px;
+		max-width: 250px;
 		margin: 10px;
-		padding: 10px;
-		background-color: rgb(168, 168, 168);
+		padding: 10px 15px;
+		background-color: #000;
+		width: fit-content;
+		border-radius: 15px;
 	}
 
 	.message-right {
@@ -14,6 +30,22 @@
 	}
 
 	.user-name {
-		color: red;
+		color: rgba(255, 255, 255, 0.7);
+		//background-color: lightblue;
+		font-size: 0.8rem;
+		margin-bottom: 5px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.time {
+		font-size: 0.75rem;
+		//margin-left: 20px;
+	}
+
+	.message {
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 600;
 	}
 }
