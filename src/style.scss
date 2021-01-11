@@ -48,3 +48,13 @@
 		font-weight: 600;
 	}
 }
+
+.main-container {
+	display: flex;
+}
+
+#user-list {
+	background-color: lightblue;
+	height: 400px;
+	width: 400px;
+}

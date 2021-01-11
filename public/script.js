@@ -8,22 +8,11 @@ const test = document.getElementById('test-btn');
 let userName = prompt('Enter your name');
 let roomName = prompt('Enter a room name');
 
-//Server event handlers
-socket.on('message-sent', message => {
-	createMessage(message.message, 'left', message.user);
-});
-
-socket.on('user-joined', cb => {
-	createMessage(`A new user '${cb.userName}' has joined`, `left`, `Socket Bot`);
-	//alert('new user has joined');
-	console.log(cb);
-});
-
 //Event emit functions
 
 socket.emit('user-joined', {
-	userName: userName,
-	roomName: roomName,
+	user: userName,
+	room: roomName,
 });
 
 form.addEventListener('submit', e => {
@@ -43,8 +32,34 @@ form.addEventListener('submit', e => {
 
 //
 //
+//Server event handlers
+socket.on('message-sent', message => {
+	createMessage(message.message, 'left', message.user);
+});
+
+socket.on('user-joined', cb => {
+	createMessage(`A new user '${cb.user}' has joined`, `left`, `Socket Bot`);
+});
+
+socket.on('user-list-update', cb => {
+	renderUserList(cb);
+});
+
+//
+//
 //
 //Middleware
+
+function renderUserList(list) {
+	let roomUsers = document.getElementById('user-list');
+	roomUsers.innerHTML = '';
+
+	list.forEach(e => {
+		let user = document.createElement('div');
+		user.textContent = e.name;
+		roomUsers.appendChild(user);
+	});
+}
 
 function GetTime() {
 	let d = new Date();
