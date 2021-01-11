@@ -5,7 +5,8 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
-		"test": "nodemon server.js"
+		"test": "nodemon server.js",
+		"push": "git push && git push heroku master"
 	},
 	"repository": {
 		"type": "git",

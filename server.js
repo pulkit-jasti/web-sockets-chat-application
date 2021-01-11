@@ -20,7 +20,14 @@ io.on('connection', socket => {
 		console.log('user disconnected');
 	});
 
+	socket.on('user-joined', cb => {
+		//socket.broadcast.emit('user-joined', cb);
+		socket.join(cb.roomName);
+		console.log(cb);
+	});
+
 	socket.on('message-sent', message => {
-		socket.broadcast.emit('message-sent', message);
+		//socket.broadcast.emit('message-sent', message);
+		socket.to(message.room).emit('message-sent', message);
 	});
 });

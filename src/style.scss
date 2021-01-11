@@ -5,8 +5,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	//font-family: 'Montserrat', sans-serif;
-	font-family: sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 
 #messages {
@@ -16,7 +15,7 @@
 
 	.message-left,
 	.message-right {
-		min-width: 100px;
+		min-width: 130px;
 		max-width: 250px;
 		margin: 10px;
 		padding: 10px 15px;
