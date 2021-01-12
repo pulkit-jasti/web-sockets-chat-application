@@ -3,8 +3,13 @@ var socket = io();
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 
-let userName = prompt('Enter your name');
-let roomName = prompt('Enter a room name');
+do {
+	var userName = prompt('Enter your name');
+} while (userName == '' || userName == null);
+
+do {
+	var roomName = prompt('Enter a room name');
+} while (roomName == '' || roomName == null);
 
 //Event emit functions
 
@@ -12,6 +17,8 @@ socket.emit('user-joined', {
 	user: userName,
 	room: roomName,
 });
+
+document.getElementById('room-name').textContent = roomName;
 
 form.addEventListener('submit', e => {
 	e.preventDefault();
@@ -35,8 +42,8 @@ socket.on('message-sent', message => {
 	createMessage(message.message, 'left', message.user);
 });
 
-socket.on('user-joined', cb => {
-	createMessage(`A new user '${cb.user}' has joined`, `left`, `Socket Bot`);
+socket.on('user-status-message', message => {
+	createMessage(message, `left`, `Socket Bot`);
 });
 
 socket.on('user-list-update', cb => {

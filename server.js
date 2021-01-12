@@ -24,13 +24,13 @@ io.on('connection', socket => {
 
 	socket.on('user-joined', cb => {
 		socket.join(cb.room);
-		socket.to(cb.room).emit('user-joined', cb);
+		socket.to(cb.room).emit('user-status-message', `A new user '${cb.user}' has joined`);
 
 		let currentUser = new User(socket.id, cb.user, cb.room);
 		usersList.push(currentUser);
 
 		let currentRoomUsers = usersList.filter(e => {
-			return e.room == 'rm1';
+			return e.room == cb.room;
 		});
 
 		io.to(cb.room).emit('user-list-update', currentRoomUsers);
@@ -42,18 +42,18 @@ io.on('connection', socket => {
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
+		let userLeft = usersList.find(e => e.id == socket.id);
 
 		usersList = usersList.filter(e => {
 			return e.id != socket.id;
 		});
 
 		let currentRoomUsers = usersList.filter(e => {
-			return e.room == 'rm1';
+			return e.room == userLeft.room;
 		});
 
-		io.to('rm1').emit('user-list-update', currentRoomUsers);
-
-		console.log(usersList);
+		io.to(userLeft.room).emit('user-list-update', currentRoomUsers);
+		socket.to(userLeft.room).emit('user-status-message', `User '${userLeft.name}' has left the room`);
 	});
 });
 
