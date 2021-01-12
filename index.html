@@ -10,14 +10,35 @@
 	</head>
 	<body>
 		<main>
-			<div class="main-container">
-				<div id="messages"></div>
-				<div id="user-list"></div>
+			<div class="chat-container">
+				<div class="left">
+					<div class="info">
+						<div class="title-1">Room</div>
+						<div id="room-name">random room name</div>
+						<div class="title-2">Participants</div>
+						<div id="user-list">
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+							<div class="user-name">User</div>
+						</div>
+					</div>
+					<a href="/">
+						<button>Leave Room</button>
+					</a>
+				</div>
+				<div class="right">
+					<div id="messages"></div>
+					<form id="form" action="" autocomplete="off">
+						<input id="input" type="text" autofocus />
+						<button type="submit">Submit</button>
+					</form>
+				</div>
 			</div>
-			<form id="form" action="" autocomplete="off">
-				<input id="input" type="text" />
-				<button type="submit">Submit</button>
-			</form>
 		</main>
 
 		<script src="/socket.io/socket.io.js"></script>

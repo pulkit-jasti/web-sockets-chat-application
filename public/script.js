@@ -2,8 +2,6 @@ var socket = io();
 
 const form = document.getElementById('form');
 const input = document.getElementById('input');
-const messages = document.getElementById('messages');
-const test = document.getElementById('test-btn');
 
 let userName = prompt('Enter your name');
 let roomName = prompt('Enter a room name');
@@ -57,6 +55,7 @@ function renderUserList(list) {
 	list.forEach(e => {
 		let user = document.createElement('div');
 		user.textContent = e.name;
+		user.classList.add('user-name');
 		roomUsers.appendChild(user);
 	});
 }
@@ -75,11 +74,17 @@ function GetTime() {
 }
 
 function createMessage(msg, dir, userName) {
+	const messages = document.getElementById('messages');
+
 	let item = document.createElement('div');
 	item.innerHTML = `
-        <div class="user-name"><div>${userName}</div> <div class="time">${GetTime()}</div></div>
-        <div class="message">${msg}</div>
+		<div class="message-${dir}">
+			<div class="user-name"><div>${userName}</div> <div class="time">${GetTime()}</div></div>
+			<div class="message">${msg}</div>
+		</div>
     `;
-	item.classList.add(`message-${dir}`);
+	item.classList.add('message-wrapper');
 	messages.appendChild(item);
+
+	messages.scrollTop += 1000;
 }
