@@ -7,18 +7,15 @@ const PORT = process.env.PORT || 5000;
 
 http.listen(PORT, () => console.log(`server started at port: ${PORT}`));
 
+//Express setup functions
 app.use(express.static('public'));
-
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/:parr', (req, res) => {
-	res.send(req.params.parr);
-});
-
 usersList = [];
 
+//Socket.io event handler functions
 io.on('connection', socket => {
 	console.log('user connected');
 

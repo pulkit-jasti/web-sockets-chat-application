@@ -52,7 +52,6 @@ socket.on('user-list-update', cb => {
 
 //
 //
-//
 //Middleware
 
 function renderUserList(list) {
@@ -67,26 +66,13 @@ function renderUserList(list) {
 	});
 }
 
-function GetTime() {
-	let d = new Date();
-	let n = d.getHours();
-
-	if (n > 12) {
-		var time = `${n - 12}:${d.getMinutes()} PM`;
-	} else {
-		var time = `${n}:${d.getMinutes()} AM`;
-	}
-
-	return time;
-}
-
 function createMessage(msg, dir, userName) {
 	const messages = document.getElementById('messages');
 
 	let item = document.createElement('div');
 	item.innerHTML = `
 		<div class="message-${dir}">
-			<div class="user-name"><div>${userName}</div> <div class="time">${GetTime()}</div></div>
+			<div class="user-name"><div>${userName}</div> <div class="time">${moment().format('hh:mm A')}</div></div>
 			<div class="message">${msg}</div>
 		</div>
     `;
