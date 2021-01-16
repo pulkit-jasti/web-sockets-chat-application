@@ -41,16 +41,20 @@ io.on('connection', socket => {
 		console.log('user disconnected');
 		let userLeft = usersList.find(e => e.id == socket.id);
 
-		usersList = usersList.filter(e => {
-			return e.id != socket.id;
-		});
+		if (userLeft) {
+			usersList = usersList.filter(e => {
+				return e.id != socket.id;
+			});
 
-		let currentRoomUsers = usersList.filter(e => {
-			return e.room == userLeft.room;
-		});
+			let currentRoomUsers = usersList.filter(e => {
+				return e.room == userLeft.room;
+			});
 
-		io.to(userLeft.room).emit('user-list-update', currentRoomUsers);
-		socket.to(userLeft.room).emit('user-status-message', `User '${userLeft.name}' has left the room`);
+			io.to(userLeft.room).emit('user-list-update', currentRoomUsers);
+			socket.to(userLeft.room).emit('user-status-message', `User '${userLeft.name}' has left the room`);
+		} else {
+			console.log('Error: User does not exist (Server may have been restarted)');
+		}
 	});
 });
 
